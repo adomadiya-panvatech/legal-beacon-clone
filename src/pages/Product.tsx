@@ -52,13 +52,13 @@ const Product = () => {
 
   const styles = {
     container: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
+      display: 'flex' as const,
+      alignItems: 'center' as const,
+      justifyContent: 'space-between' as const,
       padding: '105px 0px 105px 30px',
       maxWidth: '100rem',
       margin: 'auto',
-      flexWrap: 'wrap',
+      flexWrap: 'wrap' as const,
     },
     textContent: {
       flex: '1 1 500px',
@@ -96,17 +96,17 @@ const Product = () => {
       color: 'white',
       border: 'none',
       borderRadius: '8px',
-      cursor: 'pointer',
-      userSelect: 'none',
+      cursor: 'pointer' as const,
+      userSelect: 'none' as const,
     },
     imageContainer: {
       flex: '1 1 400px',
-      textAlign: 'right',
+      textAlign: 'right' as const,
       minWidth: 0,
     },
     imageContainerLeft: {
       flex: '1 1 400px',
-      textAlign: 'left',
+      textAlign: 'left' as const,
       minWidth: 0,
     },
     image: {

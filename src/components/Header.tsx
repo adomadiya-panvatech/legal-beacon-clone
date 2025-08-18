@@ -10,38 +10,38 @@ const productFeatures = [
   {
     icon: FolderOpen,
     title: "Case Management",
-    description: "Manage all your cases in one place with robust case management features that help you track and manage all aspects of a case.",
-    href: "/product/case-management"
+    description: "Comprehensive case tracking with intelligent organization, deadline management, and client communication tools.",
+    href: "/product#case-management"
   },
   {
     icon: Workflow,
     title: "Automated Workflows",
-    description: "Leave missed deadlines and forgotten tasks behind with powerful workflows that automate routine, time-consuming tasks.",
-    href: "/product/automated-workflows"
+    description: "Streamline repetitive tasks with customizable automation that saves time and reduces human error.",
+    href: "/product#automated-workflows"
   },
   {
     icon: BarChart3,
-    title: "Reporting and Analytics",
-    description: "Unlock the power of data-driven decision-making with intuitive dashboards and customizable reports for your firm's performance.",
-    href: "/product/reporting-analytics"
+    title: "Analytics & Reporting",
+    description: "Data-driven insights with customizable dashboards and detailed performance metrics for your firm.",
+    href: "/product#analytics"
   },
   {
     icon: CreditCard,
-    title: "Billing, Accounting & Payments",
-    description: "Bring clarity to complex processes with simple, customizable rate cards, time entries, invoices and more.",
-    href: "/product/billing-accounting"
+    title: "Billing & Payments",
+    description: "Integrated billing system with automated invoicing, payment tracking, and financial reporting.",
+    href: "/product#billing"
   },
   {
     icon: FileText,
     title: "Document Management",
-    description: "Bring order to the chaos by keeping your crucial files organized and secured, and automating manual processes.",
-    href: "/product/document-management"
+    description: "Secure document storage with version control, automated templates, and collaboration features.",
+    href: "/product#document-management"
   },
   {
     icon: UserCheck,
-    title: "Prospect & Contact Management",
-    description: "Organize your crucial contact information in our single, easy-to-navigate dashboard for clients and prospects.",
-    href: "/product/contact-management"
+    title: "Client Portal",
+    description: "Secure client communication hub with document sharing, appointment scheduling, and case updates.",
+    href: "/product#client-portal"
   }
 ];
 
