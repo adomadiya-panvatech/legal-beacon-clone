@@ -12,6 +12,7 @@ import Index from "./pages/Index";
 import Product from "./pages/Product";
 import WhoWeServe from "./pages/WhoWeServe";
 import Pricing from "./pages/Pricing";
+import ContactPage from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import PerformanceMonitor from "@/components/PerformanceMonitor";
 
@@ -58,6 +59,7 @@ const App = () => {
               <Route path="/who-we-serve" element={<WhoWeServe />} />
               <Route path="/who-we-serve/*" element={<WhoWeServe />} />
               <Route path="/pricing" element={<Pricing />} />
+              <Route path="/contact" element={<ContactPage />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

@@ -1,10 +1,10 @@
+
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import ProductFeatures from "@/components/PracticeAreas"; // This is now ProductFeatures
 import PracticeAreas from "@/components/About"; // This is now PracticeAreas
 import About from "@/components/Testimonials"; // This is now About
 import Resources from "@/components/Blog"; // This is now Resources
-import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import SkipNavigation from "@/components/SkipNavigation";
@@ -54,7 +54,6 @@ const Index = () => {
           <ProductFeatures />
           <PracticeAreas />
           <Resources />
-          <Contact />
         </main>
         <Footer />
       </div>

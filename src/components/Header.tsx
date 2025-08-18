@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Menu, X, Rocket, FolderOpen, Workflow, BarChart3, CreditCard, FileText, Users, Scale, Building, Shield, UserCheck, Calculator, MapPin, Heart, Baby, Globe, Briefcase, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,44 +9,38 @@ import { Link } from "react-router-dom";
 const productFeatures = [
   {
     icon: FolderOpen,
-    title: "Our Legal Practice Management Software",
-    description: "Leave standalone software behind",
-    href: "/product/practice-management"
-  },
-  {
-    icon: Workflow,
     title: "Case Management",
-    description: "Manage all your cases in one place",
+    description: "Manage all your cases in one place with robust case management features that help you track and manage all aspects of a case.",
     href: "/product/case-management"
   },
   {
-    icon: FileText,
-    title: "Document Solutions",
-    description: "Manage your documents",
-    href: "/product/document-solutions"
+    icon: Workflow,
+    title: "Automated Workflows",
+    description: "Leave missed deadlines and forgotten tasks behind with powerful workflows that automate routine, time-consuming tasks.",
+    href: "/product/automated-workflows"
   },
   {
     icon: BarChart3,
     title: "Reporting and Analytics",
-    description: "Gather insights into your firm's performance",
+    description: "Unlock the power of data-driven decision-making with intuitive dashboards and customizable reports for your firm's performance.",
     href: "/product/reporting-analytics"
   },
   {
     icon: CreditCard,
-    title: "Billing, Accounting and Payments",
-    description: "Increase billable time and cashflow",
+    title: "Billing, Accounting & Payments",
+    description: "Bring clarity to complex processes with simple, customizable rate cards, time entries, invoices and more.",
     href: "/product/billing-accounting"
   },
   {
-    icon: Users,
-    title: "Client Communication",
-    description: "Reach and collaborate with your clients",
-    href: "/product/client-communication"
+    icon: FileText,
+    title: "Document Management",
+    description: "Bring order to the chaos by keeping your crucial files organized and secured, and automating manual processes.",
+    href: "/product/document-management"
   },
   {
     icon: UserCheck,
-    title: "Prospect and Contact Management",
-    description: "Grow your client list",
+    title: "Prospect & Contact Management",
+    description: "Organize your crucial contact information in our single, easy-to-navigate dashboard for clients and prospects.",
     href: "/product/contact-management"
   }
 ];
@@ -166,9 +159,7 @@ const Header = () => {
   const { handleNavClick } = useSmoothScroll();
 
   const navLinks = [
-    { href: "#home", label: "Home" },
-    { href: "#blog", label: "Blog" },
-    { href: "#contact", label: "Contact" },
+    { href: "/contact", label: "Contact" },
   ];
 
   useEffect(() => {
@@ -186,8 +177,10 @@ const Header = () => {
       }`}
     >
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
-        {/* Logo */}
-        <Logo />
+        {/* Logo - Make it clickable */}
+        <Link to="/">
+          <Logo />
+        </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8 relative">
@@ -216,7 +209,7 @@ const Header = () => {
                   transition={{ duration: 0.25, ease: "easeOut" }}
                   className="absolute left-0 mt-2 w-[600px] bg-white rounded-2xl shadow-2xl p-6 z-50 border"
                 >
-                  <h3 className="text-lg font-semibold text-foreground mb-4">CARET Legal Practice Management Features</h3>
+                  <h3 className="text-lg font-semibold text-foreground mb-4">Our comprehensive legal practice management software streamlines every aspect of your firm's operations</h3>
                   <div className="grid grid-cols-2 gap-4">
                     {productFeatures.map((feature, idx) => (
                       <Link
@@ -245,7 +238,7 @@ const Header = () => {
                       className="text-primary hover:text-primary/80 text-sm font-medium"
                       onClick={() => setIsProductOpen(false)}
                     >
-                      View all legal features →
+                      Learn more about case management →
                     </Link>
                   </div>
                 </motion.div>
@@ -365,15 +358,14 @@ const Header = () => {
 
           {/* Regular Navigation Links */}
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
-              href={link.href}
+              to={link.href}
               className="relative text-sm font-medium text-foreground hover:text-primary transition-colors group"
-              onClick={(e) => handleNavClick(e, link.href.replace("#", ""))}
             >
               {link.label}
               <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-primary transition-all group-hover:w-full" />
-            </a>
+            </Link>
           ))}
 
           <Link to="/pricing" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
@@ -417,17 +409,14 @@ const Header = () => {
           >
             <nav className="container px-4 py-6 space-y-6">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.href}
-                  href={link.href}
+                  to={link.href}
                   className="block text-sm font-medium text-foreground hover:text-primary transition-colors"
-                  onClick={(e) => {
-                    handleNavClick(e, link.href.replace("#", ""));
-                    setIsMenuOpen(false);
-                  }}
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
 
               <a
