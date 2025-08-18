@@ -1,103 +1,123 @@
-
-import { CheckCircle, Award, Globe, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CheckCircle, Award, Users, Clock } from "lucide-react";
+import attorneyPhoto from "@/assets/attorney-photo.jpg";
 
 const About = () => {
-  const achievements = [
+  const values = [
     {
-      icon: Award,
-      title: "Industry Recognition",
-      description: "Consistently ranked among top legal firms by industry publications"
+      icon: CheckCircle,
+      title: "Proven Results",
+      description: "Track record of successful outcomes for our clients"
     },
     {
-      icon: Globe,
-      title: "Global Reach",
-      description: "International network of legal experts and strategic partnerships"
+      icon: Award,
+      title: "Expert Knowledge",
+      description: "Deep understanding of law and legal precedents"
+    },
+    {
+      icon: Users,
+      title: "Personal Attention",
+      description: "Every client receives dedicated, individualized care"
     },
     {
       icon: Clock,
-      title: "24/7 Availability",
-      description: "Round-the-clock support for urgent legal matters"
+      title: "Timely Response",
+      description: "Quick response times and regular case updates"
     }
   ];
-
-  const values = [
-    "Client-focused approach with personalized attention",
-    "Innovative legal strategies backed by deep expertise",
-    "Transparent communication throughout every engagement",
-    "Commitment to achieving exceptional outcomes"
-  ];
-
-  const scrollToContact = () => {
-    const element = document.querySelector('#contact');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
-    <section id="about" className="section-spacing">
-      <div className="container-custom">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Content */}
-          <div className="fade-in-up">
-            <h2 className="section-title text-primary mb-6">
-              Trusted Legal Partners Since 1998
-            </h2>
-            <p className="body-large text-muted-foreground mb-8">
-              With over two decades of experience, CaretLegal has evolved from a boutique 
-              practice to a full-service law firm serving clients across multiple industries 
-              and jurisdictions.
-            </p>
-            
-            <div className="space-y-4 mb-8">
-              {values.map((value, index) => (
-                <div key={index} className="flex items-start">
-                  <CheckCircle className="w-6 h-6 text-accent mt-0.5 mr-4 flex-shrink-0" />
-                  <p className="text-foreground">{value}</p>
-                </div>
-              ))}
+    <section 
+      id="about" 
+      className="py-20 bg-background"
+      aria-labelledby="about-heading"
+    >
+      <div className="container px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+          {/* Image Side */}
+          <div className="relative" data-aos="fade-right" data-aos-delay="200">
+            <div className="relative z-10">
+              <img
+                src={attorneyPhoto}
+                alt="Attorney Sarah Johnson - Experienced legal professional at RingRemind"
+                className="w-full max-w-md mx-auto lg:mx-0 rounded-xl shadow-2xl border-4 border-white/20 backdrop-blur-sm"
+                loading="lazy"
+              />
             </div>
-
-            <Button onClick={scrollToContact} className="btn-primary">
-              Partner With Us
-            </Button>
+            {/* Subtle decorative background */}
+            <div className="absolute -top-2 -left-2 w-full h-full bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl -z-10" aria-hidden="true"></div>
           </div>
 
-          {/* Achievements Grid */}
-          <div className="fade-in-up" style={{animationDelay: '0.2s'}}>
-            <div className="grid gap-6">
-              {achievements.map((achievement, index) => {
-                const Icon = achievement.icon;
+          {/* Content Side */}
+          <div data-aos="fade-left" data-aos-delay="400">
+            <h2 
+              id="about-heading"
+              className="text-3xl md:text-4xl font-bold text-primary mb-6"
+            >
+              About RingRemind Legal Services
+            </h2>
+            
+            <div className="text-lg text-muted-foreground mb-8 space-y-4">
+              <p data-aos="fade-up" data-aos-delay="500">
+                At RingRemind, we believe legal guidance should be empowering, not intimidating. 
+                Our team listens with empathy and fights with precision, ensuring you feel 
+                supported every step of the way.
+              </p>
+              
+              <p data-aos="fade-up" data-aos-delay="600">
+                Led by experienced attorney Sarah Johnson, our practice has been serving 
+                individuals and families in Poway and surrounding areas for over 25 years. We understand that legal issues 
+                can be overwhelming, which is why we're committed to providing clear, 
+                compassionate guidance tailored to your unique situation.
+              </p>
+            </div>
+
+            {/* Values Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8" role="list" aria-label="Our core values">
+              {values.map((value, index) => {
+                const IconComponent = value.icon;
                 return (
-                  <div key={index} className="card-simple">
-                    <div className="flex items-start">
-                      <div className="p-3 bg-primary/10 rounded-lg mr-4">
-                        <Icon className="w-6 h-6 text-primary" />
+                  <div 
+                    key={index} 
+                    className="flex items-start space-x-3" 
+                    role="listitem"
+                    data-aos="fade-up"
+                    data-aos-delay={700 + (index * 100)}
+                  >
+                    <div className="flex-shrink-0">
+                      <div className="w-8 h-8 bg-accent/10 rounded-full flex items-center justify-center">
+                        <IconComponent className="w-4 h-4 text-accent" aria-hidden="true" />
                       </div>
-                      <div>
-                        <h3 className="font-heading text-lg font-semibold text-primary mb-2">
-                          {achievement.title}
-                        </h3>
-                        <p className="text-muted-foreground">
-                          {achievement.description}
-                        </p>
-                      </div>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-primary mb-1">
+                        {value.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground">
+                        {value.description}
+                      </p>
                     </div>
                   </div>
                 );
               })}
-              
-              {/* Team Photo */}
-              <div className="mt-6">
-                <div className="aspect-[4/3] bg-gradient-to-br from-primary/5 to-accent/10 rounded-xl overflow-hidden">
-                  <img
-                    src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=600&q=80"
-                    alt="Legal team in conference room"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4" data-aos="fade-up" data-aos-delay="1200">
+              <Button 
+                size="lg"
+                className="bg-primary hover:bg-primary-light"
+                aria-label="Schedule a consultation with our legal team"
+              >
+                Schedule Consultation
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline"
+                className="border-primary text-primary hover:bg-primary hover:text-white"
+                aria-label="Download our legal guide"
+              >
+                Download Our Guide
+              </Button>
             </div>
           </div>
         </div>
