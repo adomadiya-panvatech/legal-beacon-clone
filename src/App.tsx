@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -8,6 +9,9 @@ import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Index from "./pages/Index";
+import Product from "./pages/Product";
+import WhoWeServe from "./pages/WhoWeServe";
+import Pricing from "./pages/Pricing";
 import NotFound from "./pages/NotFound";
 import PerformanceMonitor from "@/components/PerformanceMonitor";
 
@@ -49,6 +53,11 @@ const App = () => {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/product" element={<Product />} />
+              <Route path="/product/*" element={<Product />} />
+              <Route path="/who-we-serve" element={<WhoWeServe />} />
+              <Route path="/who-we-serve/*" element={<WhoWeServe />} />
+              <Route path="/pricing" element={<Pricing />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

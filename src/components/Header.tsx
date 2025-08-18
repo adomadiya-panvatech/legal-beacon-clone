@@ -1,65 +1,172 @@
+
 import { useState, useEffect } from "react";
-import { Menu, X, Rocket, Heart, Users, Shield, Plane, BarChart3, CreditCard, FileText, FolderOpen, Workflow } from "lucide-react";
+import { Menu, X, Rocket, FolderOpen, Workflow, BarChart3, CreditCard, FileText, Users, Scale, Building, Shield, UserCheck, Calculator, MapPin, Heart, Baby, Globe, Briefcase, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Logo from "./Logo";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 
-const practiceAreas = [
+const productFeatures = [
   {
     icon: FolderOpen,
-    title: "Case Management",
-    description: "Manage all your cases in one place with robust case management features that help you track and manage all aspects of a case.",
-    learnMore: "Learn more about case management",
-    color: "#4F46E5" // Indigo
+    title: "Our Legal Practice Management Software",
+    description: "Leave standalone software behind",
+    href: "/product/practice-management"
   },
   {
     icon: Workflow,
-    title: "Automated Workflows",
-    description: "Leave missed deadlines and forgotten tasks behind with powerful workflows that automate routine, time-consuming tasks.",
-    learnMore: "Learn more about workflow automation",
-    color: "#10B981" // Emerald
+    title: "Case Management",
+    description: "Manage all your cases in one place",
+    href: "/product/case-management"
+  },
+  {
+    icon: FileText,
+    title: "Document Solutions",
+    description: "Manage your documents",
+    href: "/product/document-solutions"
   },
   {
     icon: BarChart3,
     title: "Reporting and Analytics",
-    description: "Unlock the power of data-driven decision-making with intuitive dashboards and customizable reports for your firm's performance.",
-    learnMore: "Learn more about reporting and analytics",
-    color: "#F59E0B" // Amber
+    description: "Gather insights into your firm's performance",
+    href: "/product/reporting-analytics"
   },
   {
     icon: CreditCard,
-    title: "Billing, Accounting & Payments",
-    description: "Bring clarity to complex processes with simple, customizable rate cards, time entries, invoices and more.",
-    learnMore: "Learn more about billing, accounting & payments",
-    color: "#EF4444" // Red
-  },
-  {
-    icon: FileText,
-    title: "Document Management",
-    description: "Bring order to the chaos by keeping your crucial files organized and secured, and automating manual processes.",
-    learnMore: "Learn more about document management",
-    color: "#3B82F6" // Blue
+    title: "Billing, Accounting and Payments",
+    description: "Increase billable time and cashflow",
+    href: "/product/billing-accounting"
   },
   {
     icon: Users,
-    title: "Prospect & Contact Management",
-    description: "Organize your crucial contact information in our single, easy-to-navigate dashboard for clients and prospects.",
-    learnMore: "Learn more about prospect & contact management",
-    color: "#8B5CF6" // Purple
+    title: "Client Communication",
+    description: "Reach and collaborate with your clients",
+    href: "/product/client-communication"
+  },
+  {
+    icon: UserCheck,
+    title: "Prospect and Contact Management",
+    description: "Grow your client list",
+    href: "/product/contact-management"
+  }
+];
+
+const practiceAreas = [
+  {
+    icon: Scale,
+    title: "Our Legal Software Solutions",
+    description: "Comprehensive legal practice management",
+    href: "/who-we-serve/legal-software"
+  },
+  {
+    icon: Building,
+    title: "Real Estate Law",
+    description: "Streamline property transactions and management",
+    href: "/who-we-serve/real-estate"
+  },
+  {
+    icon: Briefcase,
+    title: "Employment Law",
+    description: "Manage employment cases efficiently",
+    href: "/who-we-serve/employment"
+  },
+  {
+    icon: Shield,
+    title: "Insurance Defense",
+    description: "Handle insurance defense cases",
+    href: "/who-we-serve/insurance-defense"
+  },
+  {
+    icon: Scale,
+    title: "Litigation",
+    description: "Comprehensive litigation management",
+    href: "/who-we-serve/litigation"
+  },
+  {
+    icon: Heart,
+    title: "Personal Injury",
+    description: "Manage personal injury cases",
+    href: "/who-we-serve/personal-injury"
+  },
+  {
+    icon: FileText,
+    title: "Estate Planning",
+    description: "Estate planning and probate management",
+    href: "/who-we-serve/estate-planning"
+  },
+  {
+    icon: Globe,
+    title: "Intellectual Property",
+    description: "IP case and portfolio management",
+    href: "/who-we-serve/intellectual-property"
+  },
+  {
+    icon: Shield,
+    title: "Criminal Law",
+    description: "Criminal defense case management",
+    href: "/who-we-serve/criminal-law"
+  },
+  {
+    icon: Globe,
+    title: "Immigration Law",
+    description: "Immigration case tracking",
+    href: "/who-we-serve/immigration"
+  },
+  {
+    icon: Baby,
+    title: "Family Law",
+    description: "Family law case management",
+    href: "/who-we-serve/family-law"
+  },
+  {
+    icon: Scale,
+    title: "General Practice",
+    description: "Multi-practice area management",
+    href: "/who-we-serve/general-practice"
+  }
+];
+
+const roles = [
+  {
+    icon: Building,
+    title: "Firm Admins & Office Managers",
+    description: "Administrative oversight and management"
+  },
+  {
+    icon: UserCheck,
+    title: "Firm Partners",
+    description: "Strategic decision making and oversight"
+  },
+  {
+    icon: Calculator,
+    title: "Bookkeepers & Accountants",
+    description: "Financial management and reporting"
+  }
+];
+
+const firmSizes = [
+  {
+    icon: Home,
+    title: "Smaller Firms",
+    description: "1-30 Employees"
+  },
+  {
+    icon: Building,
+    title: "Larger Firms",
+    description: "30+ Employees"
   }
 ];
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isPracticeOpen, setIsPracticeOpen] = useState(false);
+  const [isProductOpen, setIsProductOpen] = useState(false);
+  const [isWhoWeServeOpen, setIsWhoWeServeOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { handleNavClick } = useSmoothScroll();
 
   const navLinks = [
     { href: "#home", label: "Home" },
-    { href: "#about", label: "Product" },
-    { href: "#practice-areas", label: "Who we Serve", dropdown: true },
     { href: "#blog", label: "Blog" },
     { href: "#contact", label: "Contact" },
   ];
@@ -72,10 +179,11 @@ const Header = () => {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all ${scrolled
+      className={`sticky top-0 z-50 w-full transition-all ${
+        scrolled
           ? "bg-background/90 backdrop-blur-md shadow-lg"
           : "bg-background/95 backdrop-blur"
-        }`}
+      }`}
     >
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
         {/* Logo */}
@@ -83,66 +191,194 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8 relative">
-          {navLinks.map((link) =>
-            link.dropdown ? (
-              <div
-                key={link.href}
-                className="relative group"
-                onMouseEnter={() => setIsPracticeOpen(true)}
-                onMouseLeave={() => setIsPracticeOpen(false)}
-              >
-                <button className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-                  {link.label}
-                </button>
+          {/* Product Dropdown */}
+          <div
+            className="relative group"
+            onMouseEnter={() => setIsProductOpen(true)}
+            onMouseLeave={() => setIsProductOpen(false)}
+          >
+            <button 
+              className="text-sm font-medium text-foreground hover:text-primary transition-colors flex items-center"
+              onClick={() => setIsProductOpen(!isProductOpen)}
+            >
+              Product
+              <svg className="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
 
-                {/* Dropdown */}
-                <AnimatePresence>
-                  {isPracticeOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 15 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 15 }}
-                      transition={{ duration: 0.25, ease: "easeOut" }}
-                      className="absolute left-0 mt-5 w-[700px] bg-white/90 backdrop-blur-lg shadow-2xl rounded-2xl p-6 grid grid-cols-2 gap-6 z-50"
+            <AnimatePresence>
+              {isProductOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 15 }}
+                  transition={{ duration: 0.25, ease: "easeOut" }}
+                  className="absolute left-0 mt-2 w-[600px] bg-white rounded-2xl shadow-2xl p-6 z-50 border"
+                >
+                  <h3 className="text-lg font-semibold text-foreground mb-4">CARET Legal Practice Management Features</h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    {productFeatures.map((feature, idx) => (
+                      <Link
+                        key={idx}
+                        to={feature.href}
+                        className="flex items-start space-x-3 p-3 rounded-xl transition-all hover:bg-muted/40 cursor-pointer"
+                        onClick={() => setIsProductOpen(false)}
+                      >
+                        <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10">
+                          <feature.icon className="w-5 h-5 text-primary" />
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-foreground text-sm">
+                            {feature.title}
+                          </h4>
+                          <p className="text-xs text-muted-foreground mt-1">
+                            {feature.description}
+                          </p>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                  <div className="mt-4 pt-4 border-t">
+                    <Link
+                      to="/product"
+                      className="text-primary hover:text-primary/80 text-sm font-medium"
+                      onClick={() => setIsProductOpen(false)}
                     >
-                      {practiceAreas.map((area, idx) => (
-                        <a
-                          key={idx}
-                          href="#practice-areas"
-                          className="flex items-start space-x-4 p-4 rounded-xl transition-all transform hover:scale-[1.02] hover:shadow-md hover:bg-muted/40 cursor-pointer"
-                          onClick={(e) => handleNavClick(e, "practice-areas")}
-                        >
-                          <div
-                            className={`flex items-center justify-center w-12 h-12 rounded-full ${area.color}`}
+                      View all legal features →
+                    </Link>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Who We Serve Dropdown */}
+          <div
+            className="relative group"
+            onMouseEnter={() => setIsWhoWeServeOpen(true)}
+            onMouseLeave={() => setIsWhoWeServeOpen(false)}
+          >
+            <button 
+              className="text-sm font-medium text-foreground hover:text-primary transition-colors flex items-center"
+              onClick={() => setIsWhoWeServeOpen(!isWhoWeServeOpen)}
+            >
+              Who We Serve
+              <svg className="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            <AnimatePresence>
+              {isWhoWeServeOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 15 }}
+                  transition={{ duration: 0.25, ease: "easeOut" }}
+                  className="absolute left-0 mt-2 w-[800px] bg-white rounded-2xl shadow-2xl p-6 z-50 border"
+                >
+                  <div className="grid grid-cols-3 gap-6">
+                    {/* Practice Areas */}
+                    <div>
+                      <h3 className="text-lg font-semibold text-foreground mb-4">Practice areas</h3>
+                      <div className="space-y-3">
+                        {practiceAreas.slice(0, 5).map((area, idx) => (
+                          <Link
+                            key={idx}
+                            to={area.href}
+                            className="flex items-center space-x-3 p-2 rounded-lg transition-all hover:bg-muted/40 cursor-pointer"
+                            onClick={() => setIsWhoWeServeOpen(false)}
                           >
-                            <area.icon className="w-6 h-6" />
-                          </div>
-                          <div>
-                            <h4 className="font-semibold text-foreground">
+                            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10">
+                              <area.icon className="w-4 h-4 text-primary" />
+                            </div>
+                            <span className="text-sm font-medium text-foreground">
                               {area.title}
-                            </h4>
-                            <p className="text-sm text-muted-foreground mt-1">
-                              {area.description}
-                            </p>
+                            </span>
+                          </Link>
+                        ))}
+                        <Link
+                          to="/who-we-serve"
+                          className="text-primary hover:text-primary/80 text-sm font-medium pl-2"
+                          onClick={() => setIsWhoWeServeOpen(false)}
+                        >
+                          View all practice areas →
+                        </Link>
+                      </div>
+                    </div>
+
+                    {/* Roles */}
+                    <div>
+                      <h3 className="text-lg font-semibold text-foreground mb-4">Roles</h3>
+                      <div className="space-y-3">
+                        {roles.map((role, idx) => (
+                          <div
+                            key={idx}
+                            className="flex items-center space-x-3 p-2 rounded-lg"
+                          >
+                            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10">
+                              <role.icon className="w-4 h-4 text-primary" />
+                            </div>
+                            <div>
+                              <span className="text-sm font-medium text-foreground block">
+                                {role.title}
+                              </span>
+                              <span className="text-xs text-muted-foreground">
+                                {role.description}
+                              </span>
+                            </div>
                           </div>
-                        </a>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            ) : (
-              <a
-                key={link.href}
-                href={link.href}
-                className="relative text-sm font-medium text-foreground hover:text-primary transition-colors group"
-                onClick={(e) => handleNavClick(e, link.href.replace("#", ""))}
-              >
-                {link.label}
-                <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-primary transition-all group-hover:w-full" />
-              </a>
-            )
-          )}
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Firm Size */}
+                    <div>
+                      <h3 className="text-lg font-semibold text-foreground mb-4">Firm size</h3>
+                      <div className="space-y-3">
+                        {firmSizes.map((size, idx) => (
+                          <div
+                            key={idx}
+                            className="flex items-center space-x-3 p-2 rounded-lg"
+                          >
+                            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10">
+                              <size.icon className="w-4 h-4 text-primary" />
+                            </div>
+                            <div>
+                              <span className="text-sm font-medium text-foreground block">
+                                {size.title}
+                              </span>
+                              <span className="text-xs text-muted-foreground">
+                                {size.description}
+                              </span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Regular Navigation Links */}
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="relative text-sm font-medium text-foreground hover:text-primary transition-colors group"
+              onClick={(e) => handleNavClick(e, link.href.replace("#", ""))}
+            >
+              {link.label}
+              <span className="absolute left-0 -bottom-1 h-0.5 w-0 bg-primary transition-all group-hover:w-full" />
+            </a>
+          ))}
+
+          <Link to="/pricing" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+            Pricing
+          </Link>
         </nav>
 
         {/* CTA */}
@@ -180,49 +416,19 @@ const Header = () => {
             className="md:hidden border-t bg-background"
           >
             <nav className="container px-4 py-6 space-y-6">
-              {navLinks.map((link) =>
-                link.dropdown ? (
-                  <div key={link.href} className="space-y-3">
-                    <span className="block text-sm font-semibold text-foreground">
-                      {link.label}
-                    </span>
-                    <div className="grid grid-cols-1 gap-4">
-                      {practiceAreas.map((area, idx) => (
-                        <a
-                          key={idx}
-                          href="#practice-areas"
-                          className="flex items-center space-x-3 p-3 rounded-xl hover:bg-muted/40 transition-colors"
-                          onClick={(e) => {
-                            handleNavClick(e, "practice-areas");
-                            setIsMenuOpen(false);
-                          }}
-                        >
-                          <div
-                            className={`flex items-center justify-center w-10 h-10 rounded-full ${area.color}`}
-                          >
-                            <area.icon className="w-5 h-5" />
-                          </div>
-                          <span className="text-sm font-medium">
-                            {area.title}
-                          </span>
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                ) : (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    className="block text-sm font-medium text-foreground hover:text-primary transition-colors"
-                    onClick={(e) => {
-                      handleNavClick(e, link.href.replace("#", ""));
-                      setIsMenuOpen(false);
-                    }}
-                  >
-                    {link.label}
-                  </a>
-                )
-              )}
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="block text-sm font-medium text-foreground hover:text-primary transition-colors"
+                  onClick={(e) => {
+                    handleNavClick(e, link.href.replace("#", ""));
+                    setIsMenuOpen(false);
+                  }}
+                >
+                  {link.label}
+                </a>
+              ))}
 
               <a
                 href="https://stageadmin.ringremind.com/Onboarding"

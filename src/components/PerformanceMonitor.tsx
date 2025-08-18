@@ -1,144 +1,69 @@
+
 import { useEffect } from 'react';
+
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}
+
+interface ExtendedPerformanceEntry extends PerformanceEntry {
+  processingStart?: number;
+}
 
 const PerformanceMonitor = () => {
   useEffect(() => {
-    // Only run in production and if web-vitals is available
-    if (process.env.NODE_ENV === 'production' && 'PerformanceObserver' in window) {
-      
-      // Enhanced Core Web Vitals tracking
-      const trackWebVital = (name: string, value: number) => {
-        console.log(`${name}:`, value);
-        
-        // Send to Google Analytics
+    // Track Core Web Vitals
+    const trackWebVitals = () => {
+      // Largest Contentful Paint (LCP)
+      new PerformanceObserver((entryList) => {
+        for (const entry of entryList.getEntries()) {
+          if (window.gtag) {
+            window.gtag('event', 'LCP', {
+              value: Math.round(entry.startTime),
+              custom_parameter: 'core_web_vitals'
+            });
+          }
+        }
+      }).observe({ entryTypes: ['largest-contentful-paint'] });
+
+      // First Input Delay (FID)
+      new PerformanceObserver((entryList) => {
+        for (const entry of entryList.getEntries() as ExtendedPerformanceEntry[]) {
+          const fid = entry.processingStart ? entry.processingStart - entry.startTime : 0;
+          if (window.gtag) {
+            window.gtag('event', 'FID', {
+              value: Math.round(fid),
+              custom_parameter: 'core_web_vitals'
+            });
+          }
+        }
+      }).observe({ entryTypes: ['first-input'] });
+
+      // Cumulative Layout Shift (CLS)
+      let clsValue = 0;
+      new PerformanceObserver((entryList) => {
+        for (const entry of entryList.getEntries()) {
+          if (!(entry as any).hadRecentInput) {
+            clsValue += (entry as any).value;
+          }
+        }
         if (window.gtag) {
-          window.gtag('event', name, {
-            value: Math.round(value),
-            event_category: 'Web Vitals',
-            event_label: name,
-            non_interaction: true
+          window.gtag('event', 'CLS', {
+            value: Math.round(clsValue * 1000),
+            custom_parameter: 'core_web_vitals'
           });
         }
-        
-        // Send to custom analytics endpoint (if available)
-        if (process.env.REACT_APP_ANALYTICS_ENDPOINT) {
-          fetch(process.env.REACT_APP_ANALYTICS_ENDPOINT, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, value, timestamp: Date.now() })
-          }).catch(console.error);
-        }
-      };
+      }).observe({ entryTypes: ['layout-shift'] });
+    };
 
-      // Monitor Largest Contentful Paint (LCP)
-      const lcpObserver = new PerformanceObserver((list) => {
-        const entries = list.getEntries();
-        const lastEntry = entries[entries.length - 1];
-        trackWebVital('LCP', lastEntry.startTime);
-      });
-      
-      lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
-
-      // Monitor First Input Delay (FID)
-      const fidObserver = new PerformanceObserver((list) => {
-        const entries = list.getEntries();
-        entries.forEach((entry) => {
-          const fid = entry.processingStart - entry.startTime;
-          trackWebVital('FID', fid);
-        });
-      });
-      
-      fidObserver.observe({ entryTypes: ['first-input'] });
-
-      // Monitor Cumulative Layout Shift (CLS)
-      let clsValue = 0;
-      const clsObserver = new PerformanceObserver((list) => {
-        const entries = list.getEntries();
-        entries.forEach((entry: any) => {
-          if (!entry.hadRecentInput) {
-            clsValue += entry.value;
-          }
-        });
-        
-        trackWebVital('CLS', clsValue);
-      });
-      
-      clsObserver.observe({ entryTypes: ['layout-shift'] });
-
-      // Monitor First Contentful Paint (FCP)
-      const fcpObserver = new PerformanceObserver((list) => {
-        const entries = list.getEntries();
-        const firstEntry = entries[0];
-        trackWebVital('FCP', firstEntry.startTime);
-      });
-      
-      fcpObserver.observe({ entryTypes: ['first-contentful-paint'] });
-
-      // Monitor Time to Interactive (TTI) - approximated
-      const ttiObserver = new PerformanceObserver((list) => {
-        const entries = list.getEntries();
-        entries.forEach((entry) => {
-          if (entry.name === 'TTI') {
-            trackWebVital('TTI', entry.startTime);
-          }
-        });
-      });
-      
-      ttiObserver.observe({ entryTypes: ['measure'] });
-
-      // Monitor Total Blocking Time (TBT)
-      let totalBlockingTime = 0;
-      const tbtObserver = new PerformanceObserver((list) => {
-        const entries = list.getEntries();
-        entries.forEach((entry: any) => {
-          if (entry.duration > 50) {
-            totalBlockingTime += entry.duration - 50;
-          }
-        });
-        
-        trackWebVital('TBT', totalBlockingTime);
-      });
-      
-      tbtObserver.observe({ entryTypes: ['longtask'] });
-
-      // Track page load performance
-      window.addEventListener('load', () => {
-        setTimeout(() => {
-          const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
-          if (navigation) {
-            trackWebVital('DOMContentLoaded', navigation.domContentLoadedEventEnd - navigation.domContentLoadedEventStart);
-            trackWebVital('LoadComplete', navigation.loadEventEnd - navigation.loadEventStart);
-            trackWebVital('TotalLoadTime', navigation.loadEventEnd - navigation.fetchStart);
-          }
-        }, 0);
-      });
-
-      // Track user interactions
-      let firstInteraction = true;
-      const trackInteraction = () => {
-        if (firstInteraction) {
-          const now = performance.now();
-          trackWebVital('TTI_User', now);
-          firstInteraction = false;
-        }
-      };
-
-      ['click', 'keydown', 'scroll', 'touchstart'].forEach(event => {
-        document.addEventListener(event, trackInteraction, { once: true, passive: true });
-      });
-
-      // Cleanup observers on unmount
-      return () => {
-        lcpObserver.disconnect();
-        fidObserver.disconnect();
-        clsObserver.disconnect();
-        fcpObserver.disconnect();
-        ttiObserver.disconnect();
-        tbtObserver.disconnect();
-      };
+    // Initialize tracking
+    if (typeof window !== 'undefined') {
+      trackWebVitals();
     }
   }, []);
 
-  return null; // This component doesn't render anything
+  return null;
 };
 
-export default PerformanceMonitor; 
+export default PerformanceMonitor;
