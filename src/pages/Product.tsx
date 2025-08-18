@@ -1,148 +1,172 @@
+import React from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import PC_1 from "../img/CC_3.png";
+import PC_2 from "../img/CC_2.png";
+import PC_3 from "../img/CC_1.png";
+const content = {
+  label: "Care Chakra - Dashboard",
+  heading: "Smart Legal Dashboard",
+  paragraph: `Leverage AI-driven insights and document management tools to streamline your legal workflow.`,
+  buttonText: "Learn More",
+  href: "#features",
+  image: PC_1,
+};
 
-import { FolderOpen, Workflow, BarChart3, CreditCard, FileText, Users, UserCheck } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import SEO from "@/components/SEO";
+const content2 = {
+  label: "Case View",
+  heading: "AI-Driven Case Management",
+  paragraph: `Get an intelligent summary of case status, key milestones, and critical updates—powered by AI insights.`,
+  buttonText: "Learn More",
+  href: "#features",
+  image: PC_2,
+};
 
-const Product = () => {
-  const features = [
-    {
-      icon: FolderOpen,
-      title: "Our Legal Practice Management Software",
-      description: "Leave standalone software behind with our comprehensive legal practice management solution that integrates all aspects of your firm's operations.",
-      benefits: ["Centralized case management", "Integrated billing system", "Document automation", "Client portal access"]
+const content3 = {
+  label: "Appointment ",
+  heading: "Virtual Appointments",
+  paragraph: `Experience hassle-free virtual visits powered by AI for scheduling, notifications, and patient engagement.`,
+  buttonText: "Learn More",
+  href: "#features",
+  image: PC_3,
+};
+
+const Product
+= () => {
+  const styles = {
+    container: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      padding: '105px 0px 105px 30px',
+      maxWidth: '100rem',
+      margin: 'auto',
+      flexWrap: 'wrap',
     },
-    {
-      icon: Workflow,
-      title: "Case Management",
-      description: "Manage all your cases in one place with powerful case tracking, deadline management, and task automation.",
-      benefits: ["Case timeline tracking", "Automated deadline alerts", "Task assignment", "Progress monitoring"]
+    textContent: {
+      flex: '1 1 500px',
+      maxWidth: '50%',
+      minWidth: 0,
+      padding: '0 30px',
     },
-    {
-      icon: FileText,
-      title: "Document Solutions",
-      description: "Streamline document creation, storage, and management with automated templates and secure cloud storage.",
-      benefits: ["Document templates", "Version control", "Secure storage", "Easy sharing"]
+    label: {
+      display: 'inline-block',
+      background: '#ccff00',
+      padding: '6px 12px',
+      fontSize: '14px',
+      borderRadius: '6px',
+      color: '#111',
+      marginBottom: '20px',
+      fontWeight: 600,
     },
-    {
-      icon: BarChart3,
-      title: "Reporting and Analytics",
-      description: "Gather insights into your firm's performance with comprehensive reporting and analytics tools.",
-      benefits: ["Financial reports", "Performance metrics", "Time tracking", "Custom dashboards"]
+    heading: {
+      fontSize: '42px',
+      fontWeight: 700,
+      margin: '20px 0',
+      color: '#111',
     },
-    {
-      icon: CreditCard,
-      title: "Billing, Accounting and Payments",
-      description: "Increase billable time and cashflow with automated billing, expense tracking, and payment processing.",
-      benefits: ["Automated invoicing", "Payment processing", "Expense tracking", "Financial reporting"]
+    paragraph: {
+      fontSize: '18px',
+      color: '#333',
+      marginBottom: '30px',
+      lineHeight: 1.6,
     },
-    {
-      icon: Users,
-      title: "Client Communication",
-      description: "Reach and collaborate with your clients through secure messaging, client portals, and automated updates.",
-      benefits: ["Client portal", "Secure messaging", "Automated notifications", "Document sharing"]
+    button: {
+      display: 'inline-block',
+      padding: '14px 24px',
+      fontSize: '16px',
+      backgroundColor: '#000',
+      color: 'white',
+      border: 'none',
+      borderRadius: '8px',
+      cursor: 'pointer',
+      userSelect: 'none',
     },
-    {
-      icon: UserCheck,
-      title: "Prospect and Contact Management",
-      description: "Grow your client list with comprehensive CRM tools designed specifically for legal professionals.",
-      benefits: ["Lead tracking", "Contact management", "Follow-up automation", "Conversion analytics"]
-    }
-  ];
+    imageContainer: {
+      flex: '1 1 400px',
+      textAlign: 'right',
+      minWidth: 0,
+    },
+    imageContainerLeft: {
+      flex: '1 1 400px',
+      textAlign: 'left',
+      minWidth: 0,
+    },
+    image: {
+      maxWidth: '100%',
+      height: 'auto',
+      borderRadius: '12px',
+      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.1)',
+    },
+  };
+
+  const renderSection = (data, isImageLeft = false) => (
+    <div style={styles.container} className="container">
+      {isImageLeft && (
+        <div style={styles.imageContainerLeft} className="imageContainerLeft">
+          <img src={data.image} alt={`${data.label} Image`} style={styles.image} />
+        </div>
+      )}
+
+      <div style={styles.textContent} className="textContent mt-10" data-aos="fade-right">
+        <span style={styles.label}>{data.label}</span>
+        <h1 style={styles.heading}>{data.heading}</h1>
+        <p style={styles.paragraph}>{data.paragraph}</p>
+        <button
+          style={styles.button}
+          onClick={() => window.location.href = data.href}
+          aria-label={data.buttonText}
+        >
+          {data.buttonText} <span aria-hidden="true">→</span>
+        </button>
+      </div>
+
+      {!isImageLeft && (
+        <div style={styles.imageContainer} className="imageContainer" data-aos="fade-left">
+          <img src={data.image} alt={`${data.label} Image`} style={styles.image} />
+        </div>
+      )}
+    </div>
+  );
 
   return (
     <>
-      <SEO 
-        title="CARET Legal Product Features - Complete Legal Practice Management"
-        description="Discover all CARET Legal features including case management, billing, document solutions, and more. Streamline your legal practice with our comprehensive software."
-        keywords="legal practice management, case management software, legal billing, document management, legal CRM"
-      />
-      <div className="min-h-screen">
-        <Header />
-        <main className="pt-16">
-          {/* Hero Section */}
-          <section className="bg-gradient-to-br from-primary/5 to-accent/5 py-20">
-            <div className="container px-4 md:px-6">
-              <div className="text-center max-w-4xl mx-auto">
-                <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                  Complete Legal Practice Management
-                </h1>
-                <p className="text-xl text-muted-foreground mb-8">
-                  Everything your law firm needs in one integrated platform. Streamline operations, increase efficiency, and grow your practice with CARET Legal.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button size="lg" className="bg-accent hover:bg-accent-light text-accent-foreground">
-                    Start Free Trial
-                  </Button>
-                  <Button size="lg" variant="outline">
-                    Schedule Demo
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </section>
+      <style>{`
+        @media (max-width: 768px) {
+          .container {
+            flex-direction: column !important;
+            padding: 40px 20px !important;
+          }
+          .textContent, .imageContainer, .imageContainerLeft {
+            max-width: 100% !important;
+            text-align: center !important;
+            flex: none !important;
+          }
+          .imageContainer {
+            margin-top: 30px;
+          }
+          .imageContainerLeft {
+            margin-bottom: 30px;
+          }
+          h1 {
+            font-size: 28px !important;
+          }
+          p {
+            font-size: 16px !important;
+          }
+        }
+      `}</style>
 
-          {/* Features Section */}
-          <section className="py-20">
-            <div className="container px-4 md:px-6">
-              <div className="text-center mb-16">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                  CARET Legal Practice Management Features
-                </h2>
-                <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                  Comprehensive tools designed specifically for legal professionals to manage every aspect of their practice efficiently.
-                </p>
-              </div>
+      {/* Section 1: content – text left, image right */}
+      {renderSection(content, false)}
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                {features.map((feature, index) => (
-                  <div key={index} className="bg-card rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-                    <div className="flex items-start space-x-4 mb-6">
-                      <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10">
-                        <feature.icon className="w-6 h-6 text-primary" />
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                        <p className="text-muted-foreground">{feature.description}</p>
-                      </div>
-                    </div>
-                    <ul className="space-y-2">
-                      {feature.benefits.map((benefit, idx) => (
-                        <li key={idx} className="flex items-center text-sm text-muted-foreground">
-                          <div className="w-1.5 h-1.5 bg-primary rounded-full mr-3"></div>
-                          {benefit}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
+      {/* Section 2: content2 – image left, text right */}
+      {renderSection(content2, true)}
 
-          {/* CTA Section */}
-          <section className="bg-primary/5 py-20">
-            <div className="container px-4 md:px-6 text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Ready to Transform Your Legal Practice?
-              </h2>
-              <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Join thousands of legal professionals who trust CARET Legal to manage their practice efficiently.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-accent hover:bg-accent-light text-accent-foreground">
-                  Start Free Trial
-                </Button>
-                <Button size="lg" variant="outline">
-                  Contact Sales
-                </Button>
-              </div>
-            </div>
-          </section>
-        </main>
-        <Footer />
-      </div>
+      {/* Section 3: content – text left, image right again */}
+      {renderSection(content3, false)}
+
+      
     </>
   );
 };
