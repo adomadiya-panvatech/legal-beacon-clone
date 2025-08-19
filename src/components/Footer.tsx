@@ -10,24 +10,24 @@ import {
   DialogFooter,
   DialogClose
 } from "./ui/dialog";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  
+
   const quickLinks = [
-    { label: "Home", href: "#home" },
-    { label: "About", href: "#about" },
-    { label: "Practice Areas", href: "#practice-areas" },
-    { label: "Testimonials", href: "#testimonials" },
-    { label: "Blog", href: "#blog" },
-    { label: "Contact", href: "#contact" }
+    { label: "Home", to: "/" },
+    { label: "Product", to: "/product" },
+    { label: "Who We Serve", to: "/who-we-serve" },
+    { label: "Contact", to: "/contact" },
+    { label: "Pricing", to: "/pricing" }
   ];
 
   const practiceAreas = [
-    { label: "Family Law", href: "#practice-areas" },
-    { label: "Personal Injury", href: "#practice-areas" },
-    { label: "Criminal Defense", href: "#practice-areas" },
-    { label: "Immigration", href: "#practice-areas" }
+    { label: "Real Estate Law", to: "/who-we-serve" },
+    { label: "Employment Law", to: "/who-we-serve" },
+    { label: "Intellectual Property", to: "/who-we-serve" },
+    { label: "Immigration", to: "/who-we-serve" }
   ];
 
   const legalLinks = [
@@ -47,30 +47,30 @@ const Footer = () => {
               <Logo className="mb-6" textColor="text-white" />
             </a>
             <p className="text-white/80 mb-6 leading-relaxed">
-              Empowering you with expert legal guidance. Serving our community 
+              Empowering you with expert legal guidance. Serving our community
               with compassion, clarity, and unwavering dedication to justice.
             </p>
-            
+
             {/* Social Media */}
             <div className="flex space-x-4">
-              <a 
-                href="https://www.facebook.com/panvatechology/" 
+              <a
+                href="https://www.facebook.com/panvatechology/"
                 className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-accent transition-colors"
                 aria-label="Facebook"
                 target="_blank" rel="noopener noreferrer"
               >
                 <Facebook className="w-5 h-5" />
               </a>
-              <a 
-                href="https://twitter.com/PanvaTechnology" 
+              <a
+                href="https://twitter.com/PanvaTechnology"
                 className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-accent transition-colors"
                 aria-label="Twitter"
                 target="_blank" rel="noopener noreferrer"
               >
                 <Twitter className="w-5 h-5" />
               </a>
-              <a 
-                href="https://www.linkedin.com/in/panvatechnology/" 
+              <a
+                href="https://www.linkedin.com/in/panvatechnology/"
                 className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-accent transition-colors"
                 aria-label="LinkedIn"
                 target="_blank" rel="noopener noreferrer"
@@ -86,12 +86,12 @@ const Footer = () => {
             <ul className="space-y-3">
               {quickLinks.map((link, index) => (
                 <li key={index}>
-                  <a 
-                    href={link.href}
+                  <Link
+                    to={link.to}
                     className="text-white/80 hover:text-accent transition-colors"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -103,12 +103,12 @@ const Footer = () => {
             <ul className="space-y-3">
               {practiceAreas.map((area, index) => (
                 <li key={index}>
-                  <a 
-                    href={area.href}
+                  <Link
+                    to={area.to}
                     className="text-white/80 hover:text-accent transition-colors"
                   >
                     {area.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -125,7 +125,7 @@ const Footer = () => {
                   <p className="text-sm text-white/60">24/7 Emergency Line</p>
                 </div>
               </div>
-              
+
               <div className="flex items-start space-x-3">
                 <Mail className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
                 <div>
@@ -133,11 +133,11 @@ const Footer = () => {
                   <p className="text-sm text-white/60">Quick Response</p>
                 </div>
               </div>
-              
-              <a 
-                href="https://maps.app.goo.gl/FN5JNx42XErBTB8Y6" 
+
+              <a
+                href="https://maps.app.goo.gl/TKKneMcACpkCCu7M8"
                 className="flex items-start space-x-3 hover:text-accent transition-colors"
-                target="_blank" 
+                target="_blank"
                 rel="noopener noreferrer"
               >
                 <MapPin className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
@@ -156,9 +156,9 @@ const Footer = () => {
             {/* Copyright */}
             <div className="text-center md:text-left">
               <p className="text-white/80">
-                © {currentYear} Care Chakra Law Firm. All rights reserved.
+                © {currentYear} Care Chakra. All rights reserved.
               </p>
-              
+
             </div>
 
             {/* Legal Links */}
@@ -166,7 +166,7 @@ const Footer = () => {
               {/* Privacy Policy Dialog */}
               <Dialog>
                 <DialogTrigger asChild>
-                  <a 
+                  <a
                     href="#privacy-policy"
                     className="text-sm text-white/60 hover:text-accent transition-colors cursor-pointer"
                   >
@@ -214,7 +214,7 @@ const Footer = () => {
               {/* Terms of Service Dialog */}
               <Dialog>
                 <DialogTrigger asChild>
-                  <a 
+                  <a
                     href="#terms-of-service"
                     className="text-sm text-white/60 hover:text-accent transition-colors cursor-pointer"
                   >
@@ -258,7 +258,7 @@ const Footer = () => {
               {/* Attorney Advertising Dialog */}
               <Dialog>
                 <DialogTrigger asChild>
-                  <a 
+                  <a
                     href="#attorney-advertising"
                     className="text-sm text-white/60 hover:text-accent transition-colors cursor-pointer"
                   >
@@ -292,7 +292,7 @@ const Footer = () => {
               {/* Disclaimer Dialog */}
               <Dialog>
                 <DialogTrigger asChild>
-                  <a 
+                  <a
                     href="#disclaimer"
                     className="text-sm text-white/60 hover:text-accent transition-colors cursor-pointer"
                   >

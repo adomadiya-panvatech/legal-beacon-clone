@@ -13,8 +13,8 @@ import FAQ from "@/components/FAQ";
 const Index = () => {
   const faqItems = [
     {
-      question: "What is CARET Legal practice management software?",
-      answer: "CARET Legal is a comprehensive legal practice management software that helps law firms streamline operations, manage cases, automate workflows, and improve profitability through integrated case management, billing, document management, and client communication tools."
+      question: "What is Care Chakra practice management software?",
+      answer: "Care Chakra is a comprehensive legal practice management software that helps law firms streamline operations, manage cases, automate workflows, and improve profitability through integrated case management, billing, document management, and client communication tools."
     },
     {
       question: "Do you offer a free trial?",
@@ -41,10 +41,10 @@ const Index = () => {
   return (
     <>
       <SEO 
-        title="CARET Legal - Legal Practice Management Software | Boost Profits & Productivity"
-        description="CARET Legal practice management software makes life easier for everyone in your firm. Streamline operations with case management, automated workflows, billing, and more. Start free trial today."
+        title="Care Chakra - Expert Legal Services & Consultation | Poway, CA"
+        description="Care Chakra practice management software makes life easier for everyone in your firm. Streamline operations with case management, automated workflows, billing, and more. Start free trial today."
         keywords="legal practice management software, case management, legal software, law firm management, billing software, document management, legal workflows, legal practice automation"
-        url="https://caretlegal.com/"
+        url="https://ringremind.com/"
       />
       <SkipNavigation />
       <div className="min-h-screen">

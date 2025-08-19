@@ -112,8 +112,8 @@ const WhoWeServe = () => {
   return (
     <>
       <SEO 
-        title="Who We Serve - Legal Practice Areas & Firm Types | CARET Legal"
-        description="CARET Legal serves all practice areas including real estate, employment, litigation, personal injury, and more. Perfect for firms of all sizes."
+        title="Who We Serve - Legal Practice Areas & Firm Types | Care Chakra"
+        description="Care Chakra serves all practice areas including real estate, employment, litigation, personal injury, and more. Perfect for firms of all sizes."
         keywords="legal practice areas, real estate law software, employment law, litigation management, personal injury software"
       />
       <div className="min-h-screen">
@@ -127,7 +127,7 @@ const WhoWeServe = () => {
                   Who We Serve
                 </h1>
                 <p className="text-xl text-muted-foreground mb-8">
-                  CARET Legal serves legal professionals across all practice areas and firm sizes, providing tailored solutions for every legal specialty.
+                  Care Chakra serves legal professionals across all practice areas and firm sizes, providing tailored solutions for every legal specialty.
                 </p>
               </div>
             </div>
@@ -214,17 +214,14 @@ const WhoWeServe = () => {
           <section className="bg-primary/5 py-20">
             <div className="container px-4 md:px-6 text-center">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Ready to See How CARET Legal Works for Your Practice?
+                Ready to See How Care Chakra Works for Your Practice?
               </h2>
               <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
                 Discover how our specialized features can transform your legal practice, regardless of your practice area or firm size.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" className="bg-accent hover:bg-accent-light text-accent-foreground">
-                  Start Free Trial
-                </Button>
-                <Button size="lg" variant="outline">
-                  Schedule Demo
+                  Get Started
                 </Button>
               </div>
             </div>

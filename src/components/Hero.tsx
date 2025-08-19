@@ -28,7 +28,7 @@ const Hero = () => {
             data-aos="fade-down"
             data-aos-delay="200"
           >
-            Legal software that makes{" "}
+            AI-powered legal software that makes {" "}
             <span className="text-accent">life easier for everyone in your firm</span>
           </h1>
 

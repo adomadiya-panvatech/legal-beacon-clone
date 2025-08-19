@@ -61,8 +61,8 @@ const Pricing = () => {
   return (
     <>
       <SEO 
-        title="CARET Legal Pricing - Affordable Legal Practice Management Software"
-        description="Choose the perfect CARET Legal plan for your firm. Transparent pricing with no hidden fees. Start your free trial today."
+        title="Care Chakra Pricing - Affordable Legal Practice Management Software"
+        description="Choose the perfect Care Chakra plan for your firm. Transparent pricing with no hidden fees. Start your free trial today."
         keywords="legal software pricing, practice management cost, legal billing software price"
       />
       <div className="min-h-screen">
@@ -130,7 +130,7 @@ const Pricing = () => {
                       }`}
                       size="lg"
                     >
-                      {plan.price === "Custom" ? "Contact Sales" : "Start Free Trial"}
+                      {plan.price === "Custom" ? "Contact Sales" : "Get Started"}
                     </Button>
                   </div>
                 ))}
@@ -173,26 +173,6 @@ const Pricing = () => {
                     Yes, we use bank-level encryption and are fully compliant with legal industry security standards.
                   </p>
                 </div>
-              </div>
-            </div>
-          </section>
-
-          {/* CTA Section */}
-          <section className="py-20">
-            <div className="container px-4 md:px-6 text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Ready to Get Started?
-              </h2>
-              <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Start your free trial today and see why thousands of legal professionals trust CARET Legal.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-accent hover:bg-accent-light text-accent-foreground">
-                  Start Free Trial
-                </Button>
-                <Button size="lg" variant="outline">
-                  Schedule Demo
-                </Button>
               </div>
             </div>
           </section>

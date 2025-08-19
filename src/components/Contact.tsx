@@ -4,6 +4,74 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Phone, Mail, MapPin, Clock, Send, CheckCircle } from "lucide-react";
+import axios from "axios";
+import Swal from "sweetalert2";
+
+export const sendToTeams = async (formData, setVal) => {
+  const payload = {
+    "@type": "MessageCard",
+    "@context": "http://schema.org/extensions",
+    summary: "📩 New Contact Form Submission From Care Chakra",
+    themeColor: "0076D7",
+    title: `📥 New Inquiry from ${formData.firstName} ${formData.lastName}`,
+    sections: [
+      {
+        activityTitle: `👤 **${formData.firstName} ${formData.lastName}**`,
+        activitySubtitle: `📅 Submitted on ${new Date().toLocaleString()}`,
+        activityImage: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+        facts: [
+          { name: "📧 Email", value: `[${formData.email}](mailto:${formData.email})` },
+          { name: "📱 Phone", value: formData.phone ? `[${formData.phone}](tel:${formData.phone})` : "N/A" },
+          { name: "💼 Matter Type", value: formData.matterType || "N/A" },
+          { name: "📝 Message", value: `> ${formData.message}` },
+        ],
+        markdown: true
+      }
+    ],
+    potentialAction: [
+      {
+        "@type": "OpenUri",
+        name: "📧 Reply via Email",
+        targets: [
+          { os: "default", uri: `mailto:${formData.email}` }
+        ]
+      },
+      {
+        "@type": "OpenUri",
+        name: "📞 Call Now",
+        targets: [
+          { os: "default", uri: `tel:${formData.phone || ''}` }
+        ]
+      }
+    ]
+  };
+
+  try {
+    const response = await axios.post("https://stage.panvatech.com/send_to_teams", payload, {
+      headers: { "Content-Type": "application/json" },
+      maxBodyLength: Infinity
+    });
+
+    if (response.status === 200) {
+      setVal({ firstName: "", lastName: "", email: "", phone: "", matterType: "", message: "" });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops!",
+        text: "There was an error while submitting your request. Please try again later.",
+        confirmButtonColor: "#d33",
+      });
+    }
+  } catch (error) {
+    console.error("Error sending message to Teams:", error);
+    Swal.fire({
+      icon: "error",
+      title: "Oops!",
+      text: "There was an error while submitting your request. Please try again later.",
+      confirmButtonColor: "#d33",
+    });
+  }
+};
 
 const Contact = () => {
   const contactInfo = [
@@ -45,21 +113,21 @@ const Contact = () => {
     matterType: "",
     message: ""
   });
-  
+
   const [errors, setErrors] = useState({
     firstName: "",
     lastName: "",
     email: "",
     message: ""
   });
-  
+
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validate = () => {
     let valid = true;
     const newErrors: typeof errors = { firstName: "", lastName: "", email: "", message: "" };
-    
+
     if (!form.firstName.trim()) {
       newErrors.firstName = "First name is required.";
       valid = false;
@@ -79,7 +147,7 @@ const Contact = () => {
       newErrors.message = "Please tell us about your situation.";
       valid = false;
     }
-    
+
     setErrors(newErrors);
     return valid;
   };
@@ -93,26 +161,34 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     if (validate()) {
-      // Simulate form submission
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      setSubmitted(true);
-      setForm({ firstName: "", lastName: "", email: "", phone: "", matterType: "", message: "" });
+      try {
+        // Send form data to Teams
+        await sendToTeams(form, setForm);
+
+        setSubmitted(true);
+      } catch (error) {
+        console.error("Form submission failed:", error);
+      } finally {
+        setIsSubmitting(false);
+        setTimeout(() => {
+          setSubmitted(false);
+        }, 3000);
+      }
     }
-    setIsSubmitting(false);
   };
 
   return (
-    <section 
-      id="contact" 
+    <section
+      id="contact"
       className="py-20 lg:py-28 bg-gradient-to-b from-background to-muted/30"
       aria-labelledby="contact-heading"
     >
       <div className="container px-4 mx-auto">
         {/* Header Section */}
         <div className="text-center mb-16 lg:mb-20" data-aos="fade-up">
-          <h2 
+          <h2
             id="contact-heading"
             className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-6 leading-tight"
           >
@@ -136,7 +212,7 @@ const Contact = () => {
                   Fill out the form below and we'll get back to you within 24 hours.
                 </p>
               </div>
-              
+
               {submitted ? (
                 <div className="text-center py-12" data-aos="fade-in">
                   <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-6">
@@ -154,7 +230,7 @@ const Contact = () => {
                       <label htmlFor="firstName" className="block text-sm font-semibold text-foreground mb-2">
                         First Name *
                       </label>
-                      <Input 
+                      <Input
                         id="firstName"
                         name="firstName"
                         placeholder="John"
@@ -172,7 +248,7 @@ const Contact = () => {
                       <label htmlFor="lastName" className="block text-sm font-semibold text-foreground mb-2">
                         Last Name *
                       </label>
-                      <Input 
+                      <Input
                         id="lastName"
                         name="lastName"
                         placeholder="Doe"
@@ -192,7 +268,7 @@ const Contact = () => {
                     <label htmlFor="email" className="block text-sm font-semibold text-foreground mb-2">
                       Email Address *
                     </label>
-                    <Input 
+                    <Input
                       id="email"
                       type="email"
                       name="email"
@@ -212,7 +288,7 @@ const Contact = () => {
                     <label htmlFor="phone" className="block text-sm font-semibold text-foreground mb-2">
                       Phone Number
                     </label>
-                    <Input 
+                    <Input
                       id="phone"
                       type="tel"
                       name="phone"
@@ -227,7 +303,7 @@ const Contact = () => {
                     <label htmlFor="matterType" className="block text-sm font-semibold text-foreground mb-2">
                       Legal Matter Type
                     </label>
-                    <select 
+                    <select
                       id="matterType"
                       className="w-full h-12 p-3 border-2 border-input rounded-xl bg-background focus:border-primary focus:outline-none"
                       name="matterType"
@@ -247,7 +323,7 @@ const Contact = () => {
                     <label htmlFor="message" className="block text-sm font-semibold text-foreground mb-2">
                       Tell us about your situation *
                     </label>
-                    <Textarea 
+                    <Textarea
                       id="message"
                       name="message"
                       placeholder="Please provide details about your legal matter..."
@@ -263,9 +339,9 @@ const Contact = () => {
                     )}
                   </div>
 
-                  <Button 
-                    type="submit" 
-                    size="lg" 
+                  <Button
+                    type="submit"
+                    size="lg"
                     disabled={isSubmitting}
                     className="w-full h-14 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                   >
@@ -297,13 +373,13 @@ const Contact = () => {
               <h3 className="text-2xl font-bold text-foreground mb-8">
                 Contact Information
               </h3>
-              
+
               <div className="space-y-6">
                 {contactInfo.map((info, index) => {
                   const IconComponent = info.icon;
                   return (
-                    <div 
-                      key={index} 
+                    <div
+                      key={index}
                       className="flex items-start space-x-4 p-4 rounded-2xl hover:bg-muted/50 transition-colors duration-200"
                       data-aos="fade-up"
                       data-aos-delay={500 + (index * 100)}

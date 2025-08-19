@@ -26,7 +26,7 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="font-heading font-bold text-2xl text-primary">
-            CaretLegal
+            Care Chakra
           </div>
 
           {/* Desktop Navigation */}
