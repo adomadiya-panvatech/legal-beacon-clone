@@ -11,6 +11,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
+    "@vitejs/plugin-react": "^4.7.0",
     "animate.css": "^4.1.1",
     "aos": "^2.3.4",
     "axios": "^1.7.2",
@@ -30,6 +31,7 @@
     "react-wow": "^1.0.0",
     "sweetalert2": "^11.11.1",
     "typescript": "^5.9.2",
+    "vite": "^4.5.14",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
