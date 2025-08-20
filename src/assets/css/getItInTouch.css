@@ -1,0 +1,75 @@
+.getItInTouch{
+    background: #f8f9fa;
+}
+
+.getTouch{
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.contactDetails{
+    background: #089bab;
+    border-radius: 15px;
+    padding: 15px 30px;
+}   
+
+.lets_connect{
+    /* line-height: 130%; */
+    font-size: 15px;
+}
+
+.call_lineHeight{
+    line-height: 130%;
+    font-size: 15px;
+}
+
+.form_input .Mui-focused{
+    color: #089bab;
+    border-color: #089bab;
+}
+
+.form_input> .Mui-focused::after, .form_input .MuiInputBase-formControl::before{
+    border-color: #089bab !important;
+}
+
+.form_input> .Mui-focused{
+    color: #089bab !important;
+}
+
+.send_message > span{
+    text-transform: unset !important;
+    font-weight: 600;
+    letter-spacing: unset;
+    font-size: 18px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.captcha{
+    height: 100px;
+}
+
+
+@media (max-width: 767px){
+    .sec-title_Services{
+        padding-top: 1px !important;
+        padding-bottom: 25px !important;
+    }
+    .getTouch {
+        flex-wrap: wrap;
+    }
+
+    .contactDetails, .contactDetailsForm {
+        width: 100% !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    .contactDetails{
+        padding: 15px !important;
+    }
+    .pad_end{
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+}

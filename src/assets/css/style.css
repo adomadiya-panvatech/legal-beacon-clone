@@ -1,0 +1,675 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:active,
+:hover,
+:focus {
+  outline: 0 !important;
+  outline-offset: 0;
+}
+
+::before,
+::after {
+  position: absolute;
+  content: "";
+}
+
+body {
+  overflow-x: hidden;
+}
+
+:root {
+  --primary-color: #1b5b4a;
+  --primary-two: #124e52;
+  --secondary-color: #020d0a;
+  --sub-bg: #124e5205;
+  --sub-bg-two: #1b575b03;
+  --heading-color: #1c1a1d;
+  --paragraph: #020d0ab2;
+  --paragraph-light: #ffffffb2;
+  --span: #020d0ab2;
+  --border: #020d0a33;
+  --white: #ffffff;
+  --black: #020d0a;
+  --black-sub: #020d0a08;
+  --border-1px: 1px solid #020d0a33;
+  --border-2px: 2px solid #020d0a33;
+  --transition: all 0.5s ease-in-out;
+  --shadow: 0px 4px 25px 0px #0000000f;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url(../fonts/SFPRODISPLAYTHINITALIC.OTF);
+  font-weight: 100;
+}
+*{
+  font-family: "Nunito" !important;
+}
+@font-face {
+  font-family: "Nunito";
+  src: url(../fonts/SFPRODISPLAYULTRALIGHTITALIC.OTF);
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url(../fonts/SFPRODISPLAYLIGHTITALIC.OTF);
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url(../fonts/SFPRODISPLAYREGULAR.OTF);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url(../fonts/SFPRODISPLAYMEDIUM.OTF);
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url(../fonts/SFProDisplay-Semibold.woff2);
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url(../fonts/SFPRODISPLAYBOLD.OTF);
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url(../fonts/SFPRODISPLAYHEAVYITALIC.OTF);
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url(../fonts/SFPRODISPLAYBLACKITALIC.OTF);
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url(../fonts/SFPRODISPLAYBLACKITALIC.OTF);
+  font-weight: 900;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+  color: var(--heading-color);
+  font-family: "Nunito";
+  font-weight: 500;
+}
+
+h1 {
+  margin: 0;
+  padding: 0;
+  color: var(--heading-color);
+  font-family: "ClashGrotesk-Medium";
+  font-weight: 500;
+}
+
+h1 {
+  font-size: 64px;
+  line-height: 80px;
+  font-weight: 700;
+}
+
+h4 {
+  font-family: "Nunito" sans-serif;
+}
+
+@media (max-width: 767px) {
+  h1 {
+    font-size: 34px;
+    line-height: 45px;
+  }
+}
+@media (min-width: 1200px){
+  .p-footer-logo{
+    position: absolute;
+      top: -100px;
+      left: -7px;
+  }
+}
+h2 {
+  font-size: 60px;
+  line-height: 72px;
+}
+
+
+@media (max-width: 575px) {
+  h2 {
+    font-size: 35px;
+    line-height: 45px;
+  }
+}
+
+h3 {
+  font-size: 40px;
+  line-height: 52px;
+}
+
+
+h4 {
+  font-size: 26px;
+  line-height: 36px;
+}
+
+h5 {
+  font-size: 22px;
+  line-height: 32px;
+}
+
+h6 {
+  font-size: 18px;
+  line-height: 28px;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+  line-height: 32px;
+  font-size: 18px;
+}
+
+span {
+  display: inline-block;
+  color: var(--span);
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+  color: var(--heading-color);
+  transition: var(--transition);
+  font-family: "SF Pro Display";
+}
+
+a:hover {
+  color: var(--heading-color);
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+}
+
+.btn-menu {
+  /* padding: 10px 22px; */
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--heading-color);
+  display: inline-block;
+  letter-spacing: 0.5px;
+  border: 1px solid #68dc80;
+  background: #fff;
+}
+
+.btn_ss {
+  position: relative;
+  display: inline-block;
+  width: auto;
+  height: auto;
+
+  border: none;
+  cursor: pointer;
+  min-width: 150px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+
+}
+
+.btn_ss span {
+  position: relative;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px;
+  transition: 0.3s;
+}
+
+.container {
+  max-width: 1320px !important;
+  width: 100% !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+
+.btn-2::before {
+  background-color: #089bab;
+  transition: 0.3s ease-out;
+  border-radius: 10px;
+}
+
+.btn-2 span {
+  color: rgb(255, 255, 255);
+  border: 1px solid #089bab;
+  transition: 0.2s 0.1s;
+  border-radius: 10px;
+}
+
+.btn-2 span:hover {
+  color: #089bab;
+  transition: 0.2s 0.1s;
+}
+
+.btn_ss.hover-slide-right::before {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+}
+
+.btn_ss.hover-slide-right:hover::before {
+  width: 100%;
+}
+
+.btn_ss.hover-filled-slide-right::before {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.btn_ss.hover-filled-slide-right:hover::before {
+  width: 0%;
+}
+
+.getInTouch {
+  position: relative;
+  top: -1px;
+  margin-left: 5px;
+  font-size: 20px;
+}
+
+.btn-3::before {
+  background-color: #0D4CAB;
+  transition: 0.3s ease-out;
+  border-radius: 10px;
+}
+
+.btn-3 span {
+  color: rgb(255, 255, 255);
+  border: 1px solid #0D4CAB;
+  transition: 0.2s 0.1s;
+  border-radius: 10px;
+}
+
+.btn-3 span:hover {
+  color: #0D4CAB;
+  transition: 0.2s 0.1s;
+}
+
+.border-panva {
+  border-color: rgb(8 155 171) !important;
+}
+
+.w-250px {
+  width: 275px;
+}
+
+.panva-animation {
+  animation: moveLeftRight 5s infinite alternate;
+}
+
+.service-item {
+  background-color: var(--surface-color);
+  padding: 20px;
+  box-shadow: 0px 0 30px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+.service-item .icon i {
+  color:
+    color-mix(in srgb, var(--heading-color), transparent 30%);
+  font-size: 56px;
+  transition: ease-in-out 0.3s;
+  z-index: 2;
+  position: relative;
+}
+
+.service-item .icon {
+  width: 48px;
+  height: 48px;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.service-item .icon:before {
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  background:
+    color-mix(in srgb, var(--heading-color), transparent 95%);
+  border-radius: 50px;
+  z-index: 1;
+  top: 10px;
+  right: -20px;
+  transition: 0.3s;
+}
+
+.service-item:hover .icon:before {
+  background: color-mix(in srgb, #008374, transparent 50%);
+}
+
+.service-item h3 {
+  color:
+    color-mix(in srgb, var(--heading-color), transparent 20%);
+  font-weight: 700;
+  padding-bottom: 8px;
+  font-size: 22px;
+  position: relative;
+  display: inline-block;
+  border-bottom: 4px solid color-mix(in srgb, var(--heading-color), transparent 90%);
+  transition: 0.3s;
+}
+
+.service-item:hover h3 {
+  border-color:
+    color-mix(in srgb, #008374, transparent 10%);
+  color: #008374;
+}
+
+.service-item h3 {
+  line-height: 10px;
+}
+
+.panva-h4 {
+  font-size: 24px !important;
+  font-weight: 600 !important;
+}
+
+/* Main Section Styling */
+/* Add animation to images */
+.animated-image {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.6s ease-in-out;
+}
+
+.tab-pane.show.active .animated-image {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Tab Content Styling */
+.tab-pane img {
+  max-width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+/* Image Container Styling */
+.tab-pane .image-card {
+  background-color: white;
+  /* White background */
+  border-radius: 15px;
+  /* Rounded corners */
+  padding: 20px;
+  /* Padding around the image */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  /* Optional light shadow */
+  transition: all 0.3s ease-in-out;
+  /* Smooth transition on hover */
+}
+
+.tab-pane.show.active img {
+  transform: scale(1.05);
+}
+
+/* Hover effect for image container */
+.tab-pane .image-card:hover {
+  transform: scale(1.02);
+  /* Slight zoom effect */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  /* Stronger shadow on hover */
+}
+
+/* Nav Tab Styling */
+.nav-tabs {
+  border-bottom: 2px solid #ddd;
+}
+
+.nav-item {
+  margin-bottom: 10px;
+}
+
+.nav-link {
+  border: none;
+  padding: 15px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #555;
+  /* Default text color */
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+/* Lighter hover background color */
+.nav-link:hover,
+.nav-link.active {
+  background-color: #6be4e4;
+  /* Lighter color for hover and active */
+  color: #fff;
+  /* White text on hover and active */
+  border-radius: 5px;
+}
+
+/* Styling the Small Icon Circle */
+.nav-link i {
+  background-color: white;
+  /* White background for the circle */
+  border-radius: 50%;
+  /* Makes the icon container round */
+  padding: 8px;
+  /* Small padding to create the circle */
+  color: #089bab;
+  /* Icon color */
+  font-size: 24px;
+  /* Icon size */
+  margin-right: 15px;
+  /* Space between the icon and the text */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Tab Heading Styling */
+.nav-link div h4 {
+  font-size: 18px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.nav-link div p {
+  font-size: 14px;
+  color: #777;
+}
+
+/* Hover effect for better visibility */
+.nav-item:hover .nav-link {
+  background-color: #6be4e4;
+  /* Lighter hover background */
+  color: white !important;
+  /* Text color changes to white */
+}
+
+/* Active Tab Styling */
+.nav-link.active {
+  background-color: #4fd9d9;
+  /* Lighter color when active */
+  color: white !important;
+  /* Ensures text is white when active */
+}
+
+/* Hover effect for nav-link to make it lighter */
+.nav-item .nav-link:hover {
+  background:
+    color-mix(in srgb, #008374, transparent 96%);
+  color: #020d0a;
+}
+
+/* Active Nav-link Background */
+.nav-item .nav-link.active {
+  background:
+    color-mix(in srgb, #008374, transparent 96%);
+}
+
+/* Responsive Styling for Mobile */
+@media (max-width: 767px) {
+  .nav-link {
+    padding: 12px 15px;
+    font-size: 14px;
+  }
+
+  .sec-title h3 {
+    font-size: 28px;
+  }
+
+  .sec-title .panva-h4 {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 991px) {
+  .nav-link {
+    padding: 12px 18px;
+    font-size: 15px;
+  }
+}
+
+.w-125 {
+  width: 125px !important;
+}
+
+.panva-imglogo img {
+  filter: brightness(100%) contrast(101%) saturate(0%) blur(0px) hue-rotate(0deg);
+  max-height: 60px;
+  width: auto;
+  margin: 0 20px;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .panva-imglogo {
+    max-height: 40px;
+    margin: 0 10px;
+  }
+}
+
+.panva-imglogo img:hover {
+  filter: brightness(100%) contrast(100%) saturate(100%) blur(0px) hue-rotate(0deg);
+}
+
+@media (max-width: 991px) {
+  .panva-md-img {
+    width: 120% !important;
+  }
+
+  .p-mt-md-5 {
+    margin-top: 6rem !important;
+  }
+
+  .fs-xl-3x {
+    font-size: 32px;
+  }
+  .panva-serviceimg{
+    width: 60%;
+  }
+}
+@media (max-width: 556px) {
+  .panva-md-img {
+    width: 90% !important;
+  }
+
+  
+}
+@media (min-width: 992px) {
+  .panva-md-img {
+    width: 150% !important;
+  }
+
+  .fs-xl-3x {
+    font-size: 64px;
+  }
+  .panva-serviceimg{
+    width: 75%;
+  }
+}
+
+
+.swal-title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.swal-content {
+  font-size: 16px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.marquee-wrapper {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.marquee-content {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scroll-left 20s linear infinite;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* .marquee-content:hover {
+  animation-play-state: paused;
+} */
+
